@@ -1,0 +1,57 @@
+.market-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.market-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.market-header h2 { margin: 0 0 10px 0; font-size: 24px; color: #111; }
+.market-header p { margin: 0; color: #666; font-size: 15px; }
+
+/* 바둑판 배열 (Grid) */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* 개별 서비스 카드 */
+.service-card {
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px); /* 마우스 올리면 살짝 위로 떠오름 */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon { font-size: 40px; margin-bottom: 15px; }
+.service-name { font-size: 16px; margin: 0 0 8px 0; font-weight: 600; }
+.service-price { font-size: 14px; color: #868e96; margin: 0 0 20px 0; }
+
+.subscribe-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #f1f3f5;
+    color: #3b5ce8;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.subscribe-btn:hover {
+    background-color: #3b5ce8;
+    color: #fff;
+}
