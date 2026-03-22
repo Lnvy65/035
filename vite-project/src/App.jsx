@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
-import Market from './pages/Market'; // 🌟 1. 마켓 컴포넌트 불러오기
+import Market from './pages/Market'; // 1. 마켓 컴포넌트 불러오기
 
 import './App.css'; 
 

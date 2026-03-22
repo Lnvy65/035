@@ -1,7 +1,6 @@
 /* Header.css */
 
 .header {
-    /* App.css의 .header 설정에 이어, 내부 요소들을 양쪽 끝으로 벌려줍니다 */
     justify-content: space-between; 
 }
 

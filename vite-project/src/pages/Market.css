@@ -31,7 +31,7 @@
 }
 
 .service-card:hover {
-    transform: translateY(-5px); /* 마우스 올리면 살짝 위로 떠오름 */
+    transform: translateY(-5px); 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 

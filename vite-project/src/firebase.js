@@ -1,9 +1,9 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // 🌟 데이터베이스(DB) 기능
-import { getAuth } from "firebase/auth"; // 🌟 로그인/회원가입 기능
+import { getFirestore } from "firebase/firestore"; // 데이터베이스(DB) 기능
+import { getAuth } from "firebase/auth"; // 로그인/회원가입 기능
 
-// 조장님의 실제 파이어베이스 프로젝트 정보
+// 실제 파이어베이스 프로젝트 정보
 const firebaseConfig = {
   apiKey: "AIzaSyCVEtSbHk912Hvk9_YT1PZNdQiWcXqeb6Y",
   authDomain: "react-project-035.firebaseapp.com",
@@ -14,7 +14,7 @@ const firebaseConfig = {
   measurementId: "G-43QY1939B7"
 };
 
-// 파이어베이스 엔진 시동!
+// 파이어베이스 엔진 시동
 const app = initializeApp(firebaseConfig);
 
 // 다른 파일(Market.jsx, Dashboard.jsx 등)에서 쓸 수 있도록 db와 auth를 수출(export)합니다.

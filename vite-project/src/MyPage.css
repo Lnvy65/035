@@ -130,16 +130,14 @@
 .sub-table th {
     color: #868e96;
     font-weight: 600;
-    background-color: #fafbfc; /* 헤더 부분만 살짝 눈에 띄게 */
+    background-color: #fafbfc; 
 }
 
 .sub-table tr:last-child td {
-    border-bottom: none; /* 마지막 줄은 밑줄 제거 */
+    border-bottom: none; 
 }
 
-/* ---------------------------------------------------
-   🌟 6. 스켈레톤 UI (로딩 애니메이션)
---------------------------------------------------- */
+/*  6. 스켈레톤 UI (로딩 애니메이션) */
 .skeleton {
     background-color: #f0f0f0;
     background-image: linear-gradient(90deg, #f0f0f0 0px, #e0e0e0 40px, #f0f0f0 80px);
