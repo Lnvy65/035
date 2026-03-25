@@ -1,0 +1,80 @@
+/* src/pages/Admin.css */
+.admin-container {
+    padding: 30px;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 80px); /* 헤더 제외 높이 */
+}
+
+.admin-header {
+    margin-bottom: 30px;
+}
+
+.admin-header h2 { margin: 0 0 8px 0; color: #111; font-size: 26px; }
+.admin-header p { margin: 0; color: #666; font-size: 15px; }
+
+.admin-content {
+    display: flex;
+    gap: 24px;
+    height: 600px;
+}
+
+/* 왼쪽 유저 목록 영역 */
+.user-list-section {
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    overflow-y: auto; /* 스크롤바 */
+}
+
+.user-list-section h3 { margin-top: 0; margin-bottom: 16px; font-size: 16px; color: #333; }
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.user-list li {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.user-list li:hover { border-color: #3b5ce8; background-color: #f8f9fa; }
+.user-list li.active { background-color: #eef2ff; border-color: #3b5ce8; }
+
+.user-name { font-weight: 600; font-size: 15px; color: #111; margin-bottom: 4px; }
+.user-email { font-size: 13px; color: #868e96; }
+
+/* 오른쪽 상세 내역 영역 */
+.user-detail-section {
+    flex: 1; /* 남은 공간 모두 차지 */
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    overflow-y: auto;
+}
+
+.user-detail-section h3 { margin-top: 0; margin-bottom: 20px; font-size: 18px; color: #333; border-bottom: 2px solid #f1f3f5; padding-bottom: 12px; }
+
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #adb5bd;
+    font-size: 15px;
+}
+
+.admin-table { width: 100%; border-collapse: collapse; }
+.admin-table th, .admin-table td { padding: 14px; text-align: left; border-bottom: 1px solid #e9ecef; }
+.admin-table th { color: #868e96; font-size: 13px; font-weight: 600; }
+.admin-table td { color: #333; font-size: 14px; font-weight: 500; }

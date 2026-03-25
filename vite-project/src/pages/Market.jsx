@@ -2,8 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Market.css';
 
-import { db } from '../firebase'; 
-import { collection, addDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase'; 
+import { collection, addDoc, doc, getDoc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 
 export default function Market() {
     const navigate = useNavigate();
@@ -20,6 +21,23 @@ export default function Market() {
     // 구독 버튼을 눌렀을 때 실행되는 함수
     const handleSubscribe = async (service) => {
         try{
+            const user = auth.currentUser;
+
+            if(!user){
+                alert("로그인을 먼저 해주세요.");
+                navigate('/login');
+                return;
+            }
+
+            const userDocRef = doc(db, 'users', user.uid);
+            const userSnap = await getDoc(userDocRef);
+
+            if(!userSnap.exists()){
+                alert("삭제된 계정입니다.");
+                await signOut(auth);
+                navigate('/login');
+                return;
+            }
 
             await addDoc(collection(db,'subscriptions'),{
                 name: service.name,
@@ -27,11 +45,9 @@ export default function Market() {
                 category: service.category,
                 status: '활성',
                 date: '매월 1일', // 일단 결제일은 임의로 고정
-                userId: 'test-user', // 아직 로그인 기능이 없으니 가짜 유저 ID를
+                userId: user.uid,
                 createdAt: new Date()
             });
-
-            console.log("🔵 5. 전송 성공! 문서 ID:", addDoc.id);
 
             alert(`${service.name} 구독이 내 목록에 추가되었습니다!`);
             navigate('/');

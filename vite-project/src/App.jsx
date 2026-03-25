@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Dashboard from './pages/Dashboard';
-import Market from './pages/Market'; // 1. 마켓 컴포넌트 불러오기
+import Market from './pages/Market';
+import Login from './pages/Login';
+import Admin from './pages/Admin';
 
 import './App.css'; 
 
@@ -24,6 +26,8 @@ function App() {
                             <Route path="/subscriptions" element={<MySubscriptions />} />
                             <Route path="/billing" element={<BillingHistory />} />
                             <Route path="/market" element={<Market />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/admin" element={<Admin />} />
                         </Routes>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"; // 데이터베이스(DB) 기능
-import { getAuth } from "firebase/auth"; // 로그인/회원가입 기능
+import { getAuth, GoogleAuthProvider } from "firebase/auth"; // 로그인/회원가입 기능
 
 // 실제 파이어베이스 프로젝트 정보
 const firebaseConfig = {
@@ -20,3 +20,4 @@ const app = initializeApp(firebaseConfig);
 // 다른 파일(Market.jsx, Dashboard.jsx 등)에서 쓸 수 있도록 db와 auth를 수출(export)합니다.
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const provider = new GoogleAuthProvider();
