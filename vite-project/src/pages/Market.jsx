@@ -18,7 +18,7 @@ export default function Market() {
 
 
     const officialServices = [
-        { id: 1, name: '넷플릭스     프리미엄', price: 17000, category: '엔터테인먼트', icon: '🍿' },
+        { id: 1, name: '넷플릭스 프리미엄', price: 17000, category: '엔터테인먼트', icon: '🍿' },
         { id: 2, name: '유튜브 프리미엄', price: 14900, category: '엔터테인먼트', icon: '▶️' },
         { id: 3, name: '디즈니+', price: 9900, category: '엔터테인먼트', icon: '🏰' },
         { id: 4, name: '쿠팡 와우', price: 4990, category: '쇼핑', icon: '🚀' },
@@ -75,6 +75,10 @@ export default function Market() {
             alert("서비스 이름, 월 요금, 결제일을 모두 입력해 주세요!");
             return;
         }
+        if(customPrice !== Number){
+            alert("가격은 숫자로 적어주세요!");
+            return;
+        }
         saveSubscriptionToDB({
             name: customName,
             price: customPrice,
@@ -117,7 +121,7 @@ export default function Market() {
                     />
                     <input 
                         type="number" 
-                        placeholder="월 요금 (숫자만)" 
+                        placeholder="월 요금 (원)" 
                         value={customPrice} 
                         onChange={(e) => setCustomPrice(e.target.value)} 
                     />

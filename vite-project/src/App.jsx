@@ -19,7 +19,6 @@ function App() {
             <div className="app-layout">
                 <Sidebar />
                 <div className="main-wrapper">
-                    <Header />
                     <div className="content-area">
                         <Routes>
                             <Route path="/" element={<Dashboard />} />
