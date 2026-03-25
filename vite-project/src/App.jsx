@@ -6,12 +6,12 @@ import Dashboard from './pages/Dashboard';
 import Market from './pages/Market';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import BillingHistory from './pages/BillingHistory';
 
 import './App.css'; 
 
 // 임시 페이지들
 const MySubscriptions = () => <div className="page-content"><h1>My Subscriptions 페이지</h1></div>;
-const BillingHistory = () => <div className="page-content"><h1>Billing History 페이지</h1></div>;
 
 function App() {
     return (
@@ -28,6 +28,7 @@ function App() {
                             <Route path="/market" element={<Market />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/admin" element={<Admin />} />
+                            <Route path="/billing" element={<BillingHistory />} />
                         </Routes>
                     </div>
                 </div>

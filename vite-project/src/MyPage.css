@@ -158,3 +158,91 @@
 .activity-icon { font-size: 18px; color: #868e96; width: 20px; text-align: center; }
 .activity-text p { margin: 0; font-size: 14px; color: #333; font-weight: 500; }
 .activity-text span { font-size: 12px; color: #868e96; }
+
+
+/* src/MyPage.css (맨 아래 추가) */
+
+/* 결제 내역 타임라인 컨테이너 */
+.billing-timeline-container {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #f1f3f5;
+    max-width: 900px;
+}
+
+.billing-timeline-container h3 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 18px;
+    color: #111;
+    border-bottom: 2px solid #f1f3f5;
+    padding-bottom: 12px;
+}
+
+/* 개별 결제 아이템 디자인 */
+.billing-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.billing-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background-color: #fbfcfd;
+    border: 1px solid #f1f3f5;
+    border-radius: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.billing-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+}
+
+/* 왼쪽 날짜 박스 */
+.billing-date-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 60px;
+    padding-right: 16px;
+    border-right: 2px dashed #e9ecef;
+    margin-right: 20px;
+}
+
+.billing-month { font-size: 12px; color: #868e96; font-weight: 600; }
+.billing-day { font-size: 20px; color: #111; font-weight: 700; }
+
+/* 아이콘 */
+.billing-icon-box {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f3f5;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+/* 서비스 정보 */
+.billing-info { flex: 1; }
+.billing-info h4 { margin: 0 0 4px 0; font-size: 16px; color: #333; }
+.billing-info p { margin: 0; font-size: 13px; color: #868e96; }
+
+/* 가격 및 상태 */
+.billing-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111;
+    margin-right: 24px;
+}
+
+.billing-status { min-width: 80px; text-align: right; }

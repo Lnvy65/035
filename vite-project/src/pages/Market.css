@@ -55,3 +55,103 @@
     background-color: #3b5ce8;
     color: #fff;
 }
+
+/* src/pages/Market.css 맨 아래 추가 */
+
+.market-container {
+    padding: 40px;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 80px);
+}
+
+.market-header { margin-bottom: 40px; }
+.market-header h1 { margin: 0 0 10px 0; font-size: 32px; color: #111; }
+.market-header p { margin: 0; color: #666; font-size: 16px; }
+
+/* 🌟 직접 추가하기 영역 디자인 */
+.custom-sub-section {
+    background: white;
+    padding: 24px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #f1f3f5;
+    margin-bottom: 40px;
+}
+
+.custom-sub-section h3 { margin-top: 0; margin-bottom: 20px; font-size: 18px; color: #111; }
+
+.custom-sub-form {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; /* 창이 좁아지면 아래로 떨어짐 */
+}
+
+.custom-sub-form input,
+.custom-sub-form select {
+    flex: 1;
+    min-width: 150px; /* 너무 좁아지지 않게 방어 */
+    padding: 12px 16px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.custom-sub-form input:focus,
+.custom-sub-form select:focus {
+    border-color: #3b5ce8; /* 포커스 시 파란색 테두리 */
+}
+
+.custom-add-btn {
+    padding: 12px 24px;
+    background-color: #111; /* 세련된 블랙 버튼 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.custom-add-btn:hover { background-color: #333; }
+
+/* 기존 그리드 타이틀 */
+.official-list-title { margin-bottom: 20px; font-size: 18px; color: #111; }
+
+.icon-picker {
+    width: 100%; /* 한 줄 가득 채우기 */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: #fbfcfd;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.icon-picker label { font-size: 14px; color: #666; font-weight: 600; }
+
+.available-icons { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.icon-btn {
+    font-size: 20px;
+    padding: 6px 10px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover { background-color: #f1f3f5; }
+
+/* 🌟 선택된 아이콘 스타일! */
+.icon-btn.selected {
+    border-color: #3b5ce8; /* 파란색 테두리 */
+    background-color: #e3fafc;
+    box-shadow: 0 0 0 2px rgba(59, 92, 232, 0.2);
+}
