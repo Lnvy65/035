@@ -55,6 +55,7 @@ export default function Market() {
                 userId: user.uid,
                 createdAt: new Date(),
                 icon: serviceData.icon || '📁'
+                // icon: customIcon,
             });
 
             alert(`${serviceData.name} 구독이 내 목록에 추가되었습니다!`);
@@ -75,8 +76,8 @@ export default function Market() {
             alert("서비스 이름, 월 요금, 결제일을 모두 입력해 주세요!");
             return;
         }
-        if(customPrice !== Number){
-            alert("가격은 숫자로 적어주세요!");
+         if (isNaN(customPrice)) {
+            alert("가격은 숫자로 입력해 주세요!");
             return;
         }
         saveSubscriptionToDB({
@@ -152,8 +153,7 @@ export default function Market() {
                         <p className="service-price">월 {service.price.toLocaleString()}원</p>
                         <button 
                             className="subscribe-btn"
-                            onClick={() => handleOfficialSubscribe(service)}
-                        >
+                            onClick={() => handleOfficialSubscribe(service)}>
                             + 추가하기
                         </button>
                     </div>

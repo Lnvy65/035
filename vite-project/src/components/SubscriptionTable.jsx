@@ -2,6 +2,10 @@ import React from 'react';
 
 export default function SubscriptionTable({ subscriptions, handleDelete }) {
     const getServiceIcon = (name) => {
+        if(name.icons) 
+        {
+            return name.icons;
+        }
         const icons = {
             '유튜브 프리미엄': '▶️',
             '넷플릭스 프리미엄': '🍿',
