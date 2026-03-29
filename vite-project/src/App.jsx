@@ -13,6 +13,14 @@ import './App.css';
 // 임시 페이지들
 const MySubscriptions = () => <div className="page-content"><h1>My Subscriptions 페이지</h1></div>;
 
+// 에러 페이지용 임시 컴포넌트 
+const NotFound = () => (
+    <div className="page-content">
+        <h1>404 - 페이지를 찾을 수 없습니다</h1>
+        <p>요청하신 주소가 잘못되었거나 삭제되었습니다.</p>
+    </div>
+);
+
 function App() {
     return (
         <BrowserRouter>
@@ -27,7 +35,8 @@ function App() {
                             <Route path="/market" element={<Market />} />
                             <Route path="/login" element={<Login />} />
                             <Route path="/admin" element={<Admin />} />
-                            
+                            {/* 잘못된 주소 라우트 추가 */}
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </div>
                 </div>
