@@ -155,3 +155,34 @@
     background-color: #e3fafc;
     box-shadow: 0 0 0 2px rgba(59, 92, 232, 0.2);
 }
+
+/* 날짜 입력 감싸는 영역 */
+.date-input-wrapper, .official-date-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.date-input-wrapper label, .official-date-picker label {
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+}
+
+.date-input-wrapper input[type="date"],
+.official-date-picker input[type="date"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    font-family: inherit;
+}
+
+/* 오피셜 섹션 헤더 레이아웃 */
+.official-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}

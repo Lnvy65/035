@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../MyPage.css';
 import { db, auth } from '../firebase';
-import { collection, getDocs, query, where, doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, query, where, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-
+import { getActiveTotalPrice, getActiveCount } from '../Utils/SubscriptionUtils';
 import SummaryCards from '../components/SummaryCards';
 import SubscriptionTable from '../components/SubscriptionTable';
 import DashboardSidebar from '../components/DashboardSidebar';
@@ -20,6 +20,7 @@ export default function Dashboard() {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [nextBilling, setNextBilling] = useState(null);   
+    
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -57,8 +58,6 @@ export default function Dashboard() {
         const calculateNextBilling = (data) => {
             const today = new Date();
             const todayDay = today.getDate();
-
-            // 임시로 매월 1일로 하드코딩된 데이터를 사용하므로, 실제 임박한 날짜를 찾는 로직은 나중에 데이터를 진짜 날짜 변경
             const targetSub = data.find(sub => sub.name === "유튜브 프리미엄") || data[0];
             
             if (targetSub) {
@@ -72,9 +71,11 @@ export default function Dashboard() {
         return () => unsubscribe();
     }, [navigate]);
 
-    const totalPrice = subscriptions.reduce((sum, sub) => sum + Number(sub.price || 0), 0);
+    const totalPrice = getActiveTotalPrice(subscriptions);
+    const activeCount = getActiveCount(subscriptions);
+    const activeSubscriptions = subscriptions.filter(sub => sub.isActive !== false);
 
-    const categoryMap = subscriptions.reduce((map, sub) => {
+    const categoryMap = activeSubscriptions.reduce((map, sub) => {
         const category = sub.category || '기타';
         const price = Number(sub.price || 0);
         map[category] = (map[category] || 0) + price;
@@ -107,14 +108,11 @@ export default function Dashboard() {
         ],
     };
 
-    const donutLegendItems = chartLabels.map((label, index) => {
-        const value = chartDataValues[index];
-        const percentage = Math.round((value / totalPrice) * 100);
-        const color = chartColors[index];
-        return { label, color, percentage };
-    });
-
     const donutOptions = {
+        responsive: true, 
+        maintainAspectRatio: false,
+
+        devicePixelRatio: 3,
         plugins: {
             legend: {
                 display:false,
@@ -146,7 +144,28 @@ export default function Dashboard() {
             }
         }
     }
-    
+    const handleToggleActive = async (subId, currentIsActive) => {
+        try {
+               // 기존 값이 없으면 true로 간주하고, 있으면 그 반대값(!)을 넣습니다.
+               const newIsActive = currentIsActive === false ? true : false; 
+
+               // 1. 파이어베이스 DB 업데이트
+               const subRef = doc(db, 'subscriptions', subId);
+               await updateDoc(subRef, {
+                   isActive: newIsActive
+               });
+
+               // 2. 화면(State) 즉시 업데이트 (새로고침 없이 바로 반영되게!)
+               setSubscriptions(prev => 
+                   prev.map(sub => 
+                       sub.id === subId ? { ...sub, isActive: newIsActive } : sub
+                   )
+               );
+            } catch (error) {
+               console.error("상태 변경 에러:", error);
+               alert("상태 변경에 실패했습니다.");
+            }
+    };
 
     if (loading) {
         return <DashboardSkeleton />;
@@ -160,7 +179,7 @@ export default function Dashboard() {
 
             <SummaryCards 
                 totalPrice={totalPrice} 
-                activeCount={subscriptions.length} 
+                activeCount={activeCount} 
                 nextBilling={nextBilling} 
             />
 
@@ -173,6 +192,7 @@ export default function Dashboard() {
                     
                     <SubscriptionTable 
                         subscriptions={subscriptions} 
+                        onToggleActive={handleToggleActive}
                         handleDelete={handleDelete} 
                     />
                 </div>

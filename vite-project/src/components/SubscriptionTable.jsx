@@ -1,25 +1,7 @@
 import React from 'react';
+import ServiceIcons from './ServiceIcons';
 
-export default function SubscriptionTable({ subscriptions, handleDelete }) {
-    const getServiceIcon = (name) => {
-        if(name.icons) 
-        {
-            return name.icons;
-        }
-        const icons = {
-            '유튜브 프리미엄': '▶️',
-            '넷플릭스 프리미엄': '🍿',
-            '스포티파이': '🎧',
-            '쿠팡 와우': '🚀',
-            '디즈니+': '🏰',
-            '개인 헬스장': '🏋️',
-            '크리에이터 후원': '💝',
-            '어도비': '🎨',
-            '멜론':'🍈',
-        };
-        return icons[name] || '📁';
-    };
-
+export default function SubscriptionTable({ subscriptions, handleDelete, onToggleActive }) {
     return (
         <table className="sub-table">
             <thead>
@@ -32,18 +14,21 @@ export default function SubscriptionTable({ subscriptions, handleDelete }) {
                 {subscriptions.map((sub) => (
                     <tr key={sub.id}>
                         <td className="service-icon-cell">
-                            <span className="service-icon">{getServiceIcon(sub.name)}</span>
+                            <ServiceIcons name={sub.name} iconFromDB={sub.icon} />
                             {sub.name}
                         </td>
-                        <td className="price-cell">₩ {Number(sub.price).toLocaleString()}</td>
-                        <td className="date-cell">{sub.date}</td>
-                        <td>{sub.category}</td>
-                        <td>
-                            <span className={`status-badge ${sub.status === '만료됨' ? 'expired' : 'active'}`}>
-                                {sub.status}
-                            </span>
+                        <td className="price-cell" data-label="월 요금">₩ {Number(sub.price).toLocaleString()}</td>
+                        <td className="date-cell" data-label="결제일">{sub.date}</td>
+                        <td data-label="카테고리">{sub.category}</td>
+                        <td data-label="상태">
+                            <button 
+                                className={`status-toggle-btn ${sub.isActive !== false ? 'active' : 'inactive'}`}
+                                onClick={() => onToggleActive(sub.id, sub.isActive)}
+                            >
+                                {sub.isActive !== false ? '✅ 활성' : '⏸️ 비활성'}
+                            </button>
                         </td>
-                        <td>
+                        <td data-label="작업">
                             <button 
                                 className="manage-btn" 
                                 onClick={() => handleDelete(sub.id, sub.name)} 

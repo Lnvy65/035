@@ -16,6 +16,7 @@ export default function Market() {
     const [customIcon, setCustomIcon] = useState('💳');
     const availableIcons = ['🏠', '📚', '🐶', '💖', '🎓', '🏥', '🎮', '🛒', '💳', '📁'];
 
+    const [officialBillingDate, setOfficialBillingDate] = useState(new Date().toISOString().split('T')[0]);
 
     const officialServices = [
         { id: 1, name: '넷플릭스 프리미엄', price: 17000, category: '엔터테인먼트', icon: '🍿' },
@@ -51,6 +52,7 @@ export default function Market() {
                 price: Number(serviceData.price),
                 category: serviceData.category,
                 status: '활성',
+                isActive: true,
                 date: serviceData.date,
                 userId: user.uid,
                 createdAt: new Date(),
@@ -67,7 +69,7 @@ export default function Market() {
     };
 
     const handleOfficialSubscribe = (service) => {
-        saveSubscriptionToDB({ ...service, date: '매월 1일' }); // 임시 결제일
+        saveSubscriptionToDB({ ...service, date: officialBillingDate });
     };
 
     const handleCustomSubscribe = (e) => {
@@ -97,22 +99,22 @@ export default function Market() {
             </div>
             
                 <div className="custom-sub-section">
-                <h3>✍️ 나만의 구독 직접 추가하기</h3>
-                <div className="icon-picker">
-                <   label>아이콘:</label>
-                    <div className="available-icons">
-                        {availableIcons.map(icon => (
-                            <button 
-                                key={icon} 
-                                type="button" 
-                                className={`icon-btn ${customIcon === icon ? 'selected' : ''}`}
-                                onClick={() => setCustomIcon(icon)}
-                            >
+                    <h3>✍️ 나만의 구독 직접 추가하기</h3>
+                    <div className="icon-picker">
+                    <label>아이콘:</label>
+                        <div className="available-icons">
+                            {availableIcons.map(icon => (
+                                <button 
+                                    key={icon} 
+                                    type="button" 
+                                    className={`icon-btn ${customIcon === icon ? 'selected' : ''}`}
+                                    onClick={() => setCustomIcon(icon)}
+                                >
                                 {icon}
-                            </button>
-                        ))}
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                </div>
                 <form className="custom-sub-form" onSubmit={handleCustomSubscribe}>
                     <input 
                         type="text" 
@@ -126,9 +128,9 @@ export default function Market() {
                         value={customPrice} 
                         onChange={(e) => setCustomPrice(e.target.value)} 
                     />
+                    <div className="date-input-wrapper"></div>
                     <input 
-                        type="text" 
-                        placeholder="결제일 (예: 15일, 11/20)" 
+                        type="date" 
                         value={customDate} 
                         onChange={(e) => setCustomDate(e.target.value)} 
                     />
@@ -144,7 +146,17 @@ export default function Market() {
                     <button type="submit" className="custom-add-btn">+ 추가</button>
                 </form>
             </div>
-
+            <div className="official-section-header">
+                <h3>인기 구독 서비스</h3>
+                <div className="official-date-picker">
+                    <label>결제 예정일 선택: </label>
+                    <input 
+                        type="date" 
+                        value={officialBillingDate} 
+                        onChange={(e) => setOfficialBillingDate(e.target.value)} 
+                    />
+                </div>
+            </div>
             <div className="service-grid">
                 {officialServices.map((service) => (
                     <div className="service-card" key={service.id}>

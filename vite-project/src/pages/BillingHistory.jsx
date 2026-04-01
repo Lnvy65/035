@@ -5,6 +5,8 @@ import { db, auth } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 
+import { getActiveTotalPrice } from '../Utils/SubscriptionUtils';
+
 export default function BillingHistory() {
     const navigate = useNavigate();
     const [subscriptions, setSubscriptions] = useState([]);
@@ -54,8 +56,8 @@ export default function BillingHistory() {
 
     if (loading) return <div className="mypage-container"><h2>결제 내역을 불러오는 중...</h2></div>;
 
-    const totalPrice = subscriptions.reduce((sum, sub) => sum + Number(sub.price || 0), 0);
-
+    // const totalPrice = subscriptions.reduce((sum, sub) => sum + Number(sub.price || 0), 0);
+    const totalMonthlyPrice = getActiveTotalPrice(subscriptions);
     return (
         <div className="mypage-container">
             <div className="dashboard-header">
@@ -63,16 +65,14 @@ export default function BillingHistory() {
                 <p>이번 달 예정된 결제와 지난 결제 내역을 타임라인으로 확인하세요.</p>
             </div>
 
-            {/* 상단 요약 (이번 달 총 예상 지출액) */}
             <div className="dashboard-summary-cards" style={{ marginBottom: '30px' }}>
                 <div className="summary-card" style={{ flex: 'none', width: '300px', backgroundColor: '#3b5ce8', color: 'white' }}>
                     <h3 style={{ color: '#eef2ff' }}>이번 달 총 결제 예정액</h3>
-                    <h2 style={{ color: 'white' }}><span>₩</span> {totalPrice.toLocaleString()}</h2>
+                    <h2 style={{ color: 'white' }}><span>₩</span> {totalMonthlyPrice.toLocaleString()}</h2>
                     <p style={{ color: '#c7d2fe', marginTop: '10px' }}>총 {subscriptions.length}건의 결제가 대기 중입니다.</p>
                 </div>
             </div>
 
-            {/* 타임라인 형식의 결제 리스트 */}
             <div className="billing-timeline-container">
                 <h3>다가오는 결제</h3>
                 <div className="billing-list">

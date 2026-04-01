@@ -232,12 +232,10 @@
     margin-right: 16px;
 }
 
-/* 서비스 정보 */
 .billing-info { flex: 1; }
 .billing-info h4 { margin: 0 0 4px 0; font-size: 16px; color: #333; }
 .billing-info p { margin: 0; font-size: 13px; color: #868e96; }
 
-/* 가격 및 상태 */
 .billing-price {
     font-size: 16px;
     font-weight: 700;
@@ -246,3 +244,159 @@
 }
 
 .billing-status { min-width: 80px; text-align: right; }
+
+.sub-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    table-layout: auto; 
+}
+
+.sub-table th, 
+.sub-table td {
+    padding: 16px 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f3f5;
+    
+    white-space: nowrap; 
+    word-break: keep-all;
+}
+
+.service-icon-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+.service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+}
+
+/* 상태 토글 버튼 디자인 */
+.status-toggle-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 활성 상태일 때 (초록색 톤) */
+.status-toggle-btn.active {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+.status-toggle-btn.active:hover {
+    background-color: #bbdefb;
+}
+
+/* 비활성 상태일 때 (회색 톤) */
+.status-toggle-btn.inactive {
+    background-color: #f1f3f5;
+    color: #868e96;
+    /* 비활성이면 약간 투명하게 만들어서 꺼진 느낌 주기 */
+    opacity: 0.7; 
+}
+.status-toggle-btn.inactive:hover {
+    background-color: #e9ecef;
+}
+
+/* 비활성화된 전체 줄(tr) 색상 흐리게 만들기 (선택사항) */
+.sub-table tr.inactive-row {
+    opacity: 0.5;
+    background-color: #fafafa;
+}
+
+@media screen and (max-width: 768px) {
+    .sub-table thead {
+        display: none;
+    }
+
+    /* 2. 테이블 요소들의 뼈대를 전부 블록(상자) 형태로 부수고 재조립! */
+    .sub-table, .sub-table tbody, .sub-table tr, .sub-table td {
+        display: block;
+        width: 100%;
+    }
+
+    /* 3. 각 줄(tr)을 하나의 예쁜 독립된 '카드'처럼 만듭니다 */
+    .sub-table tr {
+        margin-bottom: 20px;
+        background-color: #ffffff;
+        border: 1px solid #e9ecef;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    /* 4. 각 칸(td)을 세로로 층층이 쌓고, 양쪽 정렬(flex)을 해줍니다 */
+    .sub-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px dashed #f1f3f5;
+        text-align: right; /* 내용물은 오른쪽 정렬 */
+    }
+
+    /* 마지막 칸 밑줄은 지워줍니다 */
+    .sub-table td:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    /* 🌟 5. 아까 JSX에 달아둔 '이름표(data-label)'를 화면 왼쪽(before)에 그려줍니다! */
+    .sub-table td::before {
+        content: attr(data-label); /* data-label 값을 가져와서 글자로 뿌림 */
+        font-weight: 600;
+        color: #868e96;
+        font-size: 14px;
+        text-align: left;
+    }
+
+    /* 6. 첫 번째 칸(서비스 이름)은 카드 타이틀처럼 크고 멋지게 배치! */
+    .sub-table td.service-icon-cell {
+        font-size: 18px;
+        font-weight: 700;
+        justify-content: flex-start;
+        border-bottom: 2px solid #f1f3f5;
+        padding-bottom: 16px;
+        margin-bottom: 8px;
+    }
+
+    /* 서비스 이름 앞에는 라벨(data-label)이 필요 없으니 숨깁니다 */
+    .sub-table td.service-icon-cell::before {
+        display: none; 
+    }
+
+    .dashboard-content-grid {
+        display: flex;
+        flex-direction: column; /* 세로 정렬의 핵심! */
+        gap: 24px; /* 위아래 간격 띄우기 */
+    }
+
+    /* 2. 사이드바가 모바일에서는 화면을 100% 꽉 채우게 만듭니다 */
+    .dashboard-sidebar-right {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    /* 3. (보너스) 상단에 있던 3단 요약 카드도 좁은 화면에선 위아래로 쌓아줍니다 */
+    .dashboard-summary-cards {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* 요약 카드 각각의 넓이를 100%로 쫙 펴줍니다 */
+    .summary-card {
+        width: 90%;
+        margin: 0; /* 혹시 모를 삐뚤어짐 방지 */
+    }
+}
+    
